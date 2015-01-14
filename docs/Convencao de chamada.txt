@@ -1,0 +1,10 @@
+Argumentos 
+	left to right in ECX and EDX, depois pilha
+
+Retorno
+	EAX
+
+Register preservation
+	EAX, ECX e EDX não são preservados (callee saved)
+	Demais sim (caller saved)
+

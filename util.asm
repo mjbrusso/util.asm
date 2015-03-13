@@ -17,6 +17,19 @@ exit:
 		int	0x80	        	; system call    
 ;*********************************************************************
 
+;*********************************************************************
+; void endl()
+; prints a newline character
+; Arguments: none
+;  
+; Returns: nothing
+;*********************************************************************
+endl:
+	mov ecx, util.endl
+	call print_str
+	ret
+   
+;*********************************************************************
 
 ;*********************************************************************
 ; int strlen(char *s)
@@ -41,7 +54,7 @@ strlen.end:
 
 ;*********************************************************************
 ; void print_str(char *s)
-; Print string pointed by s (zero terminated)
+; Print zero terminated string pointed by s
 ; Arguments:
 ; 	ECX: char *s
 ; Returns: nothing
@@ -107,5 +120,41 @@ print_int.notneg:
 		ret
 ;*********************************************************************
 
+
+;*********************************************************************
+; int read_str(char *s, int max_size)
+; Read up to max_size chars from standard input into the string pointed by s.
+; Arguments:
+; 	ECX: char *s
+; 	EDX: max_size
+; Returns the number of bytes read in EAX, including the terminating zero 
+;*********************************************************************
+read_str:
+		push ebx			; ebx is 'callee saved'
+		mov ebx, 0			; ebx: file descriptor (0=stdin)
+		mov eax, 3			; eax: system call number (3=sys_read)
+		int 80h				; system call 
+		pop ebx				; restore ebx
+		ret
+;*********************************************************************
+		
+
+;*********************************************************************
+; int read_int()
+; Read up to max_size chars from standard input into the string pointed by s.
+; Arguments: none
+; Returns The value entered in EAX
+;*********************************************************************
+read_int:
+		mov ecx, util.temps	
+		mov edx, 10
+		call read_str
+; TODO: convert str2int	
+		ret
+;*********************************************************************
+
+
+
 section	.data
-    util.temps	db	'00000000000',0    	; char util.temps[]="00000000000"
+    util.temps	db'00000000000',0    	; char util.temps[]="00000000000"
+    util.endl   db 10,0					; char util.endl[]="\n"

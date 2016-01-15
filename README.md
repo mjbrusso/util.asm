@@ -17,3 +17,6 @@ Register | Usage | Saved By
 %r9 | 6th argument | Caller
 %r10-11 | Temporary | Caller
 %r12-r15 | Temporary |  Callee
+
+Arguments are pased left to right 
+ _fn(%rdi, %rsi, %rdx, %rcx, %r8, %r9)_

@@ -1,0 +1,5 @@
+Thumbs.db
+*.o
+samples/*
+!samples/*.asm
+!samples/makefile

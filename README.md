@@ -5,15 +5,15 @@ A small set of x64 assembly routines
 
 Register | Usage | Saved By
 ---------|-------|---------------
-%rax | 1st return value | No
-%rbx | Base pointer | Yes
-%rcx | 4th argument | No
-%rdx | 3rd argument; 2nd return register| No
-%rsp | Stack pointer | Yes
-%rbp | Frame pointer | Yes
-%rsi | 2nd argument | No
-%rdi | 1st argument | No
-%r8 | 5th argument | No
-%r9 | 6th argument | No
-%r10-11 | Temporary | No
-%r12-r15 | Temporary |  Yes
+%rax | 1st return value | Caller
+%rbx | Base pointer | Callee
+%rcx | 4th argument | Caller
+%rdx | 3rd argument; 2nd return register| Caller
+%rsp | Stack pointer | Callee
+%rbp | Frame pointer | Callee
+%rsi | 2nd argument | Caller
+%rdi | 1st argument | Caller
+%r8 | 5th argument | Caller
+%r9 | 6th argument | Caller
+%r10-11 | Temporary | Caller
+%r12-r15 | Temporary |  Callee

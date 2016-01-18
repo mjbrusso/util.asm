@@ -1,19 +1,19 @@
-# Makefile for uil.asm assembly samples
+# Makefile for util.asm assembly samples
 
 all:	hello printint readstr
 
-hello:	hello.asm
+hello:	hello.asm ../util.asm
 	nasm -felf64 hello.asm
 	ld -o hello hello.o
 
-printint:	printint.asm
-	nasm -felf64 printint.asm
-	ld -o printint printint.o
-
-readstr:	readstr.asm
+readstr:	readstr.asm ../util.asm
 	nasm -felf64 readstr.asm
 	ld -o readstr readstr.o
 		
+printint:	printint.asm ../util.asm
+	nasm -felf64 printint.asm
+	ld -o printint printint.o
+
 rebuild:
 	make clean
 	make all

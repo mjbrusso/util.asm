@@ -39,8 +39,8 @@ Quit program
 ### print_str
 Print a string
 #####Arguments: 
-*   rdi: address of a null-terminated string (array of chars terminated by 0)
-*   
+*   `rdi`: address of a null-terminated string (array of chars terminated by 0)
+  
 #####Returns: 
 *   Nothing
 
@@ -50,7 +50,8 @@ Print a integer number (decimal)
 
 #####Arguments: 
 *   rdi: 	number
-Returns: 
+
+#####Returns: 
 *   Nothing
 
 

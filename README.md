@@ -29,9 +29,9 @@ fn(%rdi, %rsi, %rdx, %rcx, %r8, %r9)
 ### exit
 Quit program
 Arguments: 
-		None
+	None
 Returns: 
- 		This function does not return
+	This function does not return
 
 ### print_str
 Print a string

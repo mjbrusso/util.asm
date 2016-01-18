@@ -74,6 +74,7 @@ Read a int64 from standard input
 
 #####Arguments: 
 *   None
+
 #####Returns: 
 *   `rax`: The value entered
 

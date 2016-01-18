@@ -45,6 +45,7 @@ Print a string
 #####Returns: 
 *   Nothing
 
+- - -
 
 ### print_int
 Print a integer number (decimal)
@@ -54,6 +55,7 @@ Print a integer number (decimal)
 Returns: 
 *   Nothing
 
+- - -
 
 ### read_str
 Read up to max_size chars from standard input into a string.
@@ -65,6 +67,7 @@ Read up to max_size chars from standard input into a string.
 #####Returns: 
 *   `rax`: the number of bytes read
 
+- - -
 
 ### read_int
 Read a int64 from standard input
@@ -73,6 +76,8 @@ Read a int64 from standard input
 *   None
 #####Returns: 
 *   `rax`: The value entered
+
+- - -
 
 ### endl
 Prints a newline character
@@ -83,6 +88,8 @@ Prints a newline character
 #####Returns:
 *   Nothing
 
+- - -
+
 ### strlen
 Calculates the length of string s
 
@@ -92,3 +99,4 @@ Calculates the length of string s
 #####Returns: 
 *   `rax`: string size
 		
+- - -

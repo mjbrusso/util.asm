@@ -5,18 +5,18 @@ A small set of x64 assembly routines for The Netwide Assembler (NASM).
 
 Register | Usage | Saved By
 ---------|-------|---------------
-%rax | 1st return value | Caller
-%rbx | Free | Callee
-%rcx | 4th argument | Caller
-%rdx | 3rd argument | Caller
-%rsp | Stack pointer | Callee
-%rbp | Frame pointer | Callee
-%rsi | 2nd argument | Caller
-%rdi | 1st argument | Caller
-%r8 | 5th argument | Caller
-%r9 | 6th argument | Caller
-%r10-11 | Free | Caller
-%r12-r15 | Free |  Callee
+rax | 1st return value | Caller
+rbx | Free | Callee
+rcx | 4th argument | Caller
+rdx | 3rd argument | Caller
+rsp | Stack pointer | Callee
+rbp | Frame pointer | Callee
+rsi | 2nd argument | Caller
+rdi | 1st argument | Caller
+r8 | 5th argument | Caller
+r9 | 6th argument | Caller
+r10-11 | Free | Caller
+r12-r15 | Free |  Callee
 
 Arguments are passed left to right:  
 

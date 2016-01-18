@@ -31,50 +31,62 @@ Quit program
 
 #####Arguments: 
 *   None
+
 #####Returns: 
 *   This function does not return
 
 
 ### print_str
 Print a string
-Arguments:
-	rdi: address of a null-terminated string (array of chars terminated by 0)
- Returns: 
-	Nothing
+#####Arguments: 
+*   rdi: address of a null-terminated string (array of chars terminated by 0)
+*   
+#####Returns: 
+*   Nothing
+
 
 ### print_int
 Print a integer number (decimal)
-Arguments:
- 	rdi: 	number
+
+#####Arguments: 
+*   rdi: 	number
 Returns: 
-			Nothing
+*   Nothing
+
 
 ### read_str
 Read up to max_size chars from standard input into a string.
-Arguments:
- 		rdi: address of a string (array of chars)
- 		rsi: max_size (input size limit)
-Returns:
-		rax: the number of bytes read
+
+#####Arguments: 
+*   rdi: address of a string (array of chars)
+*   rsi: max_size (input size limit)
+
+#####Returns: 
+*   rax: the number of bytes read
+
 
 ### read_int
 Read a int64 from standard input
-Arguments: 
-		None
- Returns:
-		rax: The value entered
+
+#####Arguments: 
+*   None
+#####Returns: 
+*   rax: The value entered
 
 ### endl
 Prints a newline character
-Arguments: 
-		None
-Returns: 
-		Nothing
+
+#####Arguments: 
+*   None
+
+#####Returns:
+*   Nothing
 
 ### strlen
 Calculates the length of string s
-Arguments:
- 		rdi: address of a null-terminated string (array of chars terminated by 0)
-Returns:
-		rax: string size
+
+#####Arguments: 
+*   rdi: address of a null-terminated string (array of chars terminated by 0)
+#####Returns: 
+*   rax: string size
 		

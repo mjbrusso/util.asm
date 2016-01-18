@@ -40,7 +40,7 @@ Quit program
 Print a string
 #####Arguments: 
 *   `rdi`: address of a null-terminated string (array of chars terminated by 0)
-  
+   
 #####Returns: 
 *   Nothing
 
@@ -49,9 +49,8 @@ Print a string
 Print a integer number (decimal)
 
 #####Arguments: 
-*   rdi: 	number
-
-#####Returns: 
+*   `rdi`: number
+Returns: 
 *   Nothing
 
 
@@ -59,11 +58,11 @@ Print a integer number (decimal)
 Read up to max_size chars from standard input into a string.
 
 #####Arguments: 
-*   rdi: address of a string (array of chars)
-*   rsi: max_size (input size limit)
+*   `rdi`: address of a string (array of chars)
+*   `rsi`: max_size (input size limit)
 
 #####Returns: 
-*   rax: the number of bytes read
+*   `rax`: the number of bytes read
 
 
 ### read_int
@@ -72,7 +71,7 @@ Read a int64 from standard input
 #####Arguments: 
 *   None
 #####Returns: 
-*   rax: The value entered
+*   `rax`: The value entered
 
 ### endl
 Prints a newline character
@@ -87,7 +86,8 @@ Prints a newline character
 Calculates the length of string s
 
 #####Arguments: 
-*   rdi: address of a null-terminated string (array of chars terminated by 0)
+*   `rdi`: address of a null-terminated string (array of chars terminated by 0)
+  
 #####Returns: 
-*   rax: string size
+*   `rax`: string size
 		

@@ -29,13 +29,10 @@ fn(%rdi, %rsi, %rdx, %rcx, %r8, %r9)
 ### exit
 Quit program
 
-Arguments: 
-
-	None
-	
-Returns:
-
-	This function does not return
+#####Arguments: 
++None
+#####Returns:
++This function does not return
 
 
 ### print_str

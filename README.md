@@ -28,17 +28,19 @@ fn(%rdi, %rsi, %rdx, %rcx, %r8, %r9)
 
 ### exit
 Quit program
-Arguments: 
-		None
-Returns: 
- 		This function does not return
+
+#####Arguments: 
+*   None
+#####Returns: 
+*   This function does not return
 
 ### print_str
 Print a string
-Arguments:
- 		rdi: address of a null-terminated string (array of chars terminated by 0)
- Returns: 
-		Nothing
+
+#####Arguments:
+*   rdi: address of a null-terminated string (array of chars terminated by 0)
+#####Returns: 
+*   Nothing
 
 ### print_int
 Print a integer number (decimal)

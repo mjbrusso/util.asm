@@ -1,5 +1,5 @@
 # util.asm NASM Library
-A small set of x64 assembly routines.
+A small set of x64 assembly routines for The Netwide Assembler (NASM).
 
 ## Calling Convention
 

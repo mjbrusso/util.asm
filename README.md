@@ -65,11 +65,7 @@ Read up to max_size chars from standard input into a string.
 *   `rsi`: max_size (input size limit)
 
 #####Returns: 
-<<<<<<< HEAD
 *   `rax`: the number of read chars
-=======
-*   `rax`: the number of bytes read
->>>>>>> b833388a6f981eb14df1b6d1baf3f28d76ec0837
 
 - - -
 

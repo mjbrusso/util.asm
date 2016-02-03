@@ -1,6 +1,6 @@
 # Makefile for util.asm assembly samples
 
-all:	hello printint readstr
+all:	hello printint readstr readint
 
 hello:	hello.asm ../util.asm
 	nasm -felf64 hello.asm
@@ -14,11 +14,15 @@ printint:	printint.asm ../util.asm
 	nasm -felf64 printint.asm
 	ld -o printint printint.o
 
+readint:	readint.asm ../util.asm
+	nasm -felf64 readint.asm
+	ld -o readint readint.o
+	
 rebuild:
 	make clean
 	make all
 
 clean:
-	rm -f hello printint readstr
+	rm -f hello printint readstr readint
 	rm -f *~
 	rm -f *.o

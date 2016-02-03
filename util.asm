@@ -154,14 +154,34 @@ print_int.notneg:
 ;		rax: The value entered
 ;*********************************************************************
 read_int:
-		mov rdi, util.temps	
-		mov rdx, 20
-		call read_str
-		
-		
-
+		mov 	rdi, util.temps				; temp string address	
+		mov 	rsi, 20						; max input size
+		call 	read_str					; read number as string
+		lea 	rdi, [rax+util.temps-1]		; char *p = &s[strlen(string)];  //scans string backward
+		xor 	rax, rax					; result value
+		mov 	rdx, 1						; multiplier
+read_int.beginloop:		
+		cmp		rdi, util.temps				; while(p>=s){
+		jl		read_int.end				;
+		xor		rcx, rcx					;	
+		mov 	cl, byte [rdi] 				; 	 cl = current char
+		cmp 	cl, '-'						;	 if(cl=='-')
+		jne		read_int.notneg				;
+		neg		rax							;		rax=-rax
+		jmp		read_int.end				;
+read_int.notneg:					
+		cmp		cl, '9'						;	 if(!isdigit(cl)) continue
+		jg		read_int.endloop			;
+		sub		cl, '0'						;
+		jl		read_int.endloop			;
+		imul	rcx, rdx					;	 digit_value = current_char * multiplier
+		add		rax, rcx					;	 result += digit_value
+		imul	rdx, 10						;	 multiplier *= 10
+read_int.endloop:
+		dec		rdi							;	 previous char //scans string backward
+		jmp		read_int.beginloop			; }
+read_int.end:		
 		ret
-; *********************************************************************
 
 section	.data
     util.temps	db	'000000000000000000000',0    	; char util.temps[]="00000000000"

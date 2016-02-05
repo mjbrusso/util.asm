@@ -32,7 +32,7 @@ exit:
 ;*********************************************************************
 endl:
 	mov		rdi, util.endl
-	call	print_str
+	call	printstr
 	ret
    
 ;*********************************************************************
@@ -60,7 +60,7 @@ strlen.end:
 
 
 ;*********************************************************************
-; print_str
+; printstr
 ;
 ; Print a string
 ; Arguments:
@@ -68,20 +68,20 @@ strlen.end:
 ; Returns: 
 ;		Nothing
 ;*********************************************************************
-print_str:
-		mov 	rcx, rdi
+printstr:
+		push 	rdi			; save copy (rdi should be caller saved)
 		call 	strlen
 		mov     rdx, rax	; string size
-		mov     rsi, rcx    ; string
+		pop     rsi		    ; string
         mov		rax, 1		; system call number (1=sys_write)
         mov     rdi, 1      ; file descriptor (1=stdout)       
-        syscall				; system call    
+        syscall				; system call            
 		ret
 ;*********************************************************************
 
 
 ;*********************************************************************
-; read_str
+; readstr
 ;
 ; Read up to max_size chars from standard input into a string.
 ; Arguments:
@@ -90,7 +90,7 @@ print_str:
 ; Returns:
 ;		rax: the number of bytes read
 ;*********************************************************************
-read_str:
+readstr:
 		mov		r8, rdi				; copy of buffer address
 		mov		rax, 0				; system call number (0=sys_read)
 		mov 	rdx, rsi			; pointer to buffer
@@ -105,7 +105,7 @@ read_str:
 
 
 ;*********************************************************************
-; print_int
+; printint
 ;
 ; Print a integer number (decimal)
 ; Arguments:
@@ -113,39 +113,39 @@ read_str:
 ; Returns: 
 ;			Nothing
 ;*********************************************************************
-print_int:
+printint:
 		mov		rax, rdi			; rax = n	
 		xor 	rcx, rcx			; is_neg = false
 		cmp 	rax, 0				;
-		jge		print_int.nn  		; if(n<0)	  
+		jge		printint.nn  		; if(n<0)	  
 		not 	rcx					; 		is_neg = true
 		neg 	rax					;     	n = -n
-print_int.nn:	
+printint.nn:	
 		mov 	r10, 10				; r10 = 10
 		mov 	rdi, util.temps+20	; char *p = &s[10]
-print_int.loop:						; do{
+printint.loop:						; do{
 		xor 	rdx, rdx			;		rdx=0 
 		div 	r10					; 		rdx=rdx:rax%10; rax=rdx:rax/10
 		add 	dl, '0'				;		decimal digit
 		mov 	byte [rdi], dl		;		*p = digit in dl
 		dec 	rdi					; 		p--
 		cmp 	rax, 0				; 
-		jg 		print_int.loop		; }while (n>0)
+		jg 		printint.loop		; }while (n>0)
 
 		test 	rcx, rcx			; if(is_neg)
-		jz		print_int.notneg	;   	// Prepend minus sign	
+		jz		printint.notneg	;   	// Prepend minus sign	
 		mov 	byte [rdi], '-'		; 		*p = '-'
 		dec 	rdi					;		p--
-print_int.notneg:		
+printint.notneg:		
 		inc 	rdi					; p++
-		call 	print_str			; print number
+		call 	printstr			; print number
 		ret
 ;*********************************************************************	
 	 
 	
 
 ;*********************************************************************
-; read_int
+; readint
 ;
 ; Read a int64 from standard input
 ; Arguments: 
@@ -153,34 +153,34 @@ print_int.notneg:
 ; Returns:
 ;		rax: The value entered
 ;*********************************************************************
-read_int:
+readint:
 		mov 	rdi, util.temps				; temp string address	
 		mov 	rsi, 20						; max input size
-		call 	read_str					; read number as string
+		call 	readstr						; read number as string
 		lea 	rdi, [rax+util.temps-1]		; char *p = &s[strlen(string)];  //scans string backward
 		xor 	rax, rax					; result value
 		mov 	rdx, 1						; multiplier
-read_int.beginloop:		
+readint.beginloop:		
 		cmp		rdi, util.temps				; while(p>=s){
-		jl		read_int.end				;
+		jl		readint.end					;
 		xor		rcx, rcx					;	
 		mov 	cl, byte [rdi] 				; 	 cl = current char
 		cmp 	cl, '-'						;	 if(cl=='-')
-		jne		read_int.notneg				;
+		jne		readint.notneg				;
 		neg		rax							;		rax=-rax
-		jmp		read_int.end				;
-read_int.notneg:					
+		jmp		readint.end					;
+readint.notneg:					
 		cmp		cl, '9'						;	 if(!isdigit(cl)) continue
-		jg		read_int.endloop			;
+		jg		readint.endloop				;
 		sub		cl, '0'						;
-		jl		read_int.endloop			;
+		jl		readint.endloop				;
 		imul	rcx, rdx					;	 digit_value = current_char * multiplier
 		add		rax, rcx					;	 result += digit_value
 		imul	rdx, 10						;	 multiplier *= 10
-read_int.endloop:
+readint.endloop:
 		dec		rdi							;	 previous char //scans string backward
-		jmp		read_int.beginloop			; }
-read_int.end:		
+		jmp		readint.beginloop			; }
+readint.end:		
 		ret
 
 section	.data

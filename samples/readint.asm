@@ -4,14 +4,23 @@ section		.text
 global		_start
 
 _start:
-	call	read_int
+	mov		rdi, prompt
+	call	printstr
 	
-	mov 	rdi, rax
-	call 	print_int
+	call	readint
+	
+	imul 	r14, rax, 2
+	
+	mov		rdi, msg2
+	call	printstr
+	
+	mov		rdi, r14
+	call 	printint
 	call 	endl
 	
 	call 	exit   
 	
             
 section		.data
-    nome 	times 100 db 0
+     prompt	db 'Input a number: ', 0
+     msg2	db 'Twice: ', 0

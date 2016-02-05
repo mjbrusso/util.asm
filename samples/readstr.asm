@@ -5,25 +5,25 @@ global		_start
 
 _start:
 	lea		rdi, [prompt]
-	call	print_str
+	call	printstr
 	
 	lea		rdi, [nome]
 	mov		rsi, 99
-	call	read_str	
+	call	readstr	
 		
 	mov 	rdi, rax
-	call 	print_int
+	call 	printint
 	lea 	rdi, [msg]
-	call 	print_str	
+	call 	printstr	
 
 	call 	endl
 	
 	lea 	rdi, [delim]
-	call 	print_str	
+	call 	printstr	
 	lea 	rdi, [nome]
-	call 	print_str	
+	call 	printstr	
 	lea 	rdi, [delim]
-	call 	print_str	
+	call 	printstr	
 	call 	endl
 		
 	call 	exit   

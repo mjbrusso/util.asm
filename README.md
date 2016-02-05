@@ -5,18 +5,19 @@ A small set of x64 assembly routines for The Netwide Assembler (NASM).
 
 Register | Usage | Saved By
 ---------|-------|---------------
-rax | 1st return value | Caller
+rax | Return value | Caller
 rbx | Free | Callee
 rcx | 4th argument | Caller
 rdx | 3rd argument | Caller
 rsp | Stack pointer | Callee
-rbp | Frame pointer | Callee
+rbp | Free (the frame pointer is omitted) | Callee
 rsi | 2nd argument | Caller
-rdi | 1st argument | Caller
+rdi | 1st argument | pop rbx
 r8 | 5th argument | Caller
 r9 | 6th argument | Caller
 r10-11 | Free | Caller
 r12-r15 | Free |  Callee
+
 
 Arguments are passed left to right:  
 
@@ -47,7 +48,7 @@ Print a string
 
 - - -
 
-### print_int
+### printint
 Print a integer number (decimal)
 
 #####Arguments: 
@@ -57,7 +58,7 @@ Returns:
 
 - - -
 
-### read_str
+### readstr
 Read up to max_size chars from standard input into a string.
 
 #####Arguments: 
@@ -69,7 +70,7 @@ Read up to max_size chars from standard input into a string.
 
 - - -
 
-### read_int
+### readint
 Read a int64 from standard input
 
 #####Arguments: 
@@ -101,3 +102,4 @@ Calculates the length of string s
 *   `rax`: string size
 		
 - - -
+

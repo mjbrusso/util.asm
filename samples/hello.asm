@@ -1,11 +1,11 @@
-%include '../util.asm'
+%include	'../util.asm'
 
 section		.text
 global 		_start
 
 _start:
 	lea		rdi, [msg]
-	call	print_str
+	call	printstr
 	call	endl
 	call	exit   
 

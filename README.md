@@ -3,21 +3,22 @@ A small set of x64 assembly routines for The Netwide Assembler (NASM).
 
 ## Calling Convention
 
-Register | Usage | Saved By
+Register | Usage | Preserved across function calls (Callee saved?)
 ---------|-------|---------------
-rax | Return value | Caller
-rbx | Free | Callee
-rcx | 4th argument | Caller
-rdx | 3rd argument | Caller
-rsp | Stack pointer | Callee
-rbp | Free (the frame pointer is omitted) | Callee
-rsi | 2nd argument | Caller
-rdi | 1st argument | pop rbx
-r8 | 5th argument | Caller
-r9 | 6th argument | Caller
-r10-11 | Free | Caller
-r12-r15 | Free |  Callee
+rax | Return value | No
+rbx | Free | Yes
+rcx | 4th argument | No
+rdx | 3rd argument | No
+rsp | Stack pointer | Yes
+rbp | Free (the frame pointer is omitted) | No
+rsi | 2nd argument | No
+rdi | 1st argument | No
+r8 | 5th argument | No
+r9 | 6th argument | No
+r10-11 | Free | No
+r12-r15 | Free |  Yes
 
+For more information see [System V Application Binary Interface](http://www.x86-64.org/documentation/abi.pdf).
 
 Arguments are passed left to right:  
 

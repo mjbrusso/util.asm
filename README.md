@@ -39,7 +39,7 @@ Quit program
 
 - - -
 
-### print_str
+### printstr
 Print a string
 #####Arguments: 
 *   `rdi`: address of a null-terminated string (array of chars terminated by 0)

@@ -101,7 +101,7 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 
 ### Library functions
 
-### `exit`
+###`exit`
 Quit program
 
 **Arguments:** 
@@ -110,97 +110,96 @@ Quit program
 
 **Returns:**
   
--  This function does not return
+- This function does not return
 
 - - -
 
-### `endl`
+###`endl`
 
 **Description:** 
 Prints a newline (line break)
 
 **Arguments:** 
  
--   None
+- None
 
 **Returns:**
   
--    Nothing
+- Nothing
 
 ---
 
-###printstr
+###`printstr`
 
-> **Description:** 
-> Print a string
-> 
-> **Arguments:** 
-> 
->  -   `rdi`: address of a null-terminated string (array of chars terminated by 0)
->
-> **Returns:**
->  
->   - Nothing
+**Description:** 
+Print a string
 
-- - -
+**Arguments:** 
 
-### printint
+- `rdi`: address of a null-terminated string (array of chars terminated by 0)
 
-> **Description:** 
-> Print a integer number (decimal)
-> 
-> **Arguments:** 
-> 
-> -  `rdi`: number
->
->
-> **Returns:**
->  
-> -  Nothing
+**Returns:**
+ 
+- Nothing
 
 - - -
 
-### readstr
+###`printint`
 
-> **Description:** Read up to _max_size_ chars from standard input into a string.
-> 
-> **Arguments:** 
-> 
-> -  `rdi`: address of a string (array of chars)
-> -    `rsi`: input size limit (_max_size_)
->
-> **Returns:**
->  
-> -  `rax`: Number of characters read
+**Description:** 
+Print a integer number (decimal)
 
-- - -
+**Arguments:** 
 
-### readint
-> **Description:** 
-> Read a int64 from standard input
->
-> **Arguments:** 
-> 
-> -  None
->
-> **Returns:**
->  
-> -  `rax`: The value entered
+- `rdi`: number
+
+**Returns:**
+ 
+- Nothing
 
 - - -
 
-### strlen
+###`readstr`
 
-> **Description:** 
-> Calculates the length of string ( excluding the terminating null)
->
-> **Arguments:** 
-> 
-> -  `rdi`: address of a null-terminated string (array of chars terminated by 0)
->
-> **Returns:**
->  
-> -   `rax`: string size
+**Description:** Read up to _max_size_ chars from standard input into a string.
+
+**Arguments:** 
+
+- `rdi`: address of a string (array of chars)
+- `rsi`: input size limit (_max_size_)
+
+**Returns:**
+ 
+- `rax`: Number of characters read
+
+- - -
+
+### `readint`
+**Description:** 
+Read a int64 from standard input
+
+**Arguments:** 
+
+- None
+
+**Returns:**
+ 
+- `rax`: The value entered
+
+- - -
+
+###`strlen`
+
+**Description:** 
+Calculates the length of string ( excluding the terminating null)
+
+**Arguments:** 
+
+- `rdi`: address of a null-terminated string (array of chars terminated by 0)
+
+**Returns:**
+ 
+- `rax`: string size
 		
 - - -
 

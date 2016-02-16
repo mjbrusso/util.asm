@@ -69,7 +69,7 @@ section .data
 msg	db	'Hello, World!', 0	
 ```
 ----------
-Part II - NASM
+Part II - The Library
 ---
 
 ### Calling Convention

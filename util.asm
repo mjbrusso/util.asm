@@ -33,11 +33,7 @@ exit:
 ;		Nothing
 ;*********************************************************************
 endl:
-<<<<<<< HEAD
-	mov		rdi, util.endl		; Line feed 
-=======
 	mov		rdi, util.endl
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 	call	printstr
 	ret
    
@@ -54,21 +50,13 @@ endl:
 ;*********************************************************************
 strlen:				
 		xor		rax, rax			; rax=0			// reset count
-<<<<<<< HEAD
 .loop:								; do{
-=======
-strlen.loop:						; do{
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		cmp		byte [rdi], 0		;   if (*s==0)	// If zero, skip loop
 		je		strlen.end			;     break
 		inc		rax					;   rax++ 		// increment count
 		inc		rdi					; 	s++ 		// advance to the next char
 		jmp		strlen.loop			; }while(true)
-<<<<<<< HEAD
 .end:
-=======
-strlen.end:
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		ret							; return rax
 ;*********************************************************************
 
@@ -123,15 +111,9 @@ readstr:
 ;
 ; Print a integer number (decimal)
 ; Arguments:
-<<<<<<< HEAD
 ; 		rdi: 	number (n)
 ; Returns: 
 ;		Nothing
-=======
-; 	rdi: 	number
-; Returns: 
-;			Nothing
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 ;*********************************************************************
 printint:
 		mov		rax, rdi			; rax = n	
@@ -140,17 +122,10 @@ printint:
 		jge		printint.nn  		; if(n<0)	  
 		not 	rcx					; 		is_neg = true
 		neg 	rax					;     	n = -n
-<<<<<<< HEAD
 .nn:	
 		mov 	r10, 10				; r10 = 10
 		mov 	rdi, util.temps+20	; char *p = &s[10]
 .loop:								; do{
-=======
-printint.nn:	
-		mov 	r10, 10				; r10 = 10
-		mov 	rdi, util.temps+20	; char *p = &s[10]
-printint.loop:						; do{
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		xor 	rdx, rdx			;		rdx=0 
 		div 	r10					; 		rdx=rdx:rax%10; rax=rdx:rax/10
 		add 	dl, '0'				;		decimal digit
@@ -163,11 +138,7 @@ printint.loop:						; do{
 		jz		printint.notneg	;   	// Prepend minus sign	
 		mov 	byte [rdi], '-'		; 		*p = '-'
 		dec 	rdi					;		p--
-<<<<<<< HEAD
 .notneg:		
-=======
-printint.notneg:		
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		inc 	rdi					; p++
 		call 	printstr			; print number
 		ret
@@ -191,11 +162,7 @@ readint:
 		lea 	rdi, [rax+util.temps-1]		; char *p = &s[strlen(string)];  //scans string backward
 		xor 	rax, rax					; result value
 		mov 	rdx, 1						; multiplier
-<<<<<<< HEAD
 .beginloop:		
-=======
-readint.beginloop:		
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		cmp		rdi, util.temps				; while(p>=s){
 		jl		readint.end					;
 		xor		rcx, rcx					;	
@@ -204,11 +171,7 @@ readint.beginloop:
 		jne		readint.notneg				;
 		neg		rax							;		rax=-rax
 		jmp		readint.end					;
-<<<<<<< HEAD
 .notneg:					
-=======
-readint.notneg:					
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 		cmp		cl, '9'						;	 if(!isdigit(cl)) continue
 		jg		readint.endloop				;
 		sub		cl, '0'						;
@@ -216,7 +179,6 @@ readint.notneg:
 		imul	rcx, rdx					;	 digit_value = current_char * multiplier
 		add		rax, rcx					;	 result += digit_value
 		imul	rdx, 10						;	 multiplier *= 10
-<<<<<<< HEAD
 .endloop:
 		dec		rdi							;	 previous char //scans string backward
 		jmp		readint.beginloop			; }
@@ -225,14 +187,4 @@ readint.notneg:
 
 section	.data
     util.temps	db	'000000000000000000000',0    	; char util.temps[]="000000000000000000000"
-=======
-readint.endloop:
-		dec		rdi							;	 previous char //scans string backward
-		jmp		readint.beginloop			; }
-readint.end:		
-		ret
-
-section	.data
-    util.temps	db	'000000000000000000000',0    	; char util.temps[]="00000000000"
->>>>>>> accc96d23afeea59f372bc22203af3dee1623245
     util.endl   db 	10,0							; char util.endl[]="\n"

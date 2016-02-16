@@ -55,18 +55,18 @@ mov     ax,0b11001000   ; binary
 
 ###Hello World 
 ```nasm
-%include '../util.asm'  ; Inclui a biblioteca
+%include '../util.asm'		; Includes the library
 
-section .text           ; Sessão 
-global  _start          ; Ponto de entrada do programa
+section .text				; Program code
+global  _start          	; Ponto de entrada do programa
 _start:
-	lea	rdi, [msg]
-	call	printstr
-	call	endl
-	call	exit   
+	lea	rdi, [msg]			; Load msg address in rdi (1st function argument)
+	call	printstr		; Show the string
+	call	endl			; Line break
+	call	exit			; Quit program   
 
-section .data
-msg	db	'Hello, World!', 0	
+section .data				; Program initialized data
+msg	db	'Hello, World!', 0	; String terminated by zero	
 ```
 ----------
 Part II - The Library

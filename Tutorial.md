@@ -12,9 +12,7 @@ Part I - NASM
 ###Assembling  and running a program
 ```
 nasm -felf64 hello.asm
-
 ld -o hello hello.o
-
 ./hello
 ```
 

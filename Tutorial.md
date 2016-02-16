@@ -10,9 +10,13 @@ Part I - NASM
 `sudo apt-get install nasm `
 
 ###Assembling  and running a program
-`nasm -felf64 hello.asm
+```
+nasm -felf64 hello.asm
+
 ld -o hello hello.o
-./hello`
+
+./hello
+```
 
 ###Comments
 `; Line comment`

@@ -1,7 +1,12 @@
 %include '../util.asm'
 
+<<<<<<< HEAD
 section		.text
 global 		_start         
+=======
+section    .text
+global _start         
+>>>>>>> accc96d23afeea59f372bc22203af3dee1623245
 
 _start:
 	mov rdi, 1234567890

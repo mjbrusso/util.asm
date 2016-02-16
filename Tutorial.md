@@ -101,7 +101,7 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 
 ### Library functions
 
-### exit
+### `exit`
 Quit program
 
 **Arguments:** 
@@ -114,18 +114,18 @@ Quit program
 
 - - -
 
-### endl
+### `endl`
 
-> **Description:** 
-> Prints a newline (line break)
->
-> **Arguments:** 
-> 
-> -   None
->
-> **Returns:**
->  
-> -    Nothing
+**Description:** 
+Prints a newline (line break)
+
+**Arguments:** 
+ 
+-   None
+
+**Returns:**
+  
+-    Nothing
 
 ---
 

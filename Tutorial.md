@@ -58,7 +58,7 @@ mov     ax,0b11001000   ; binary
 %include '../util.asm'		; Includes the library
 
 section .text				; Program code
-global  _start          	; Ponto de entrada do programa
+global  _start          	; Entry point
 _start:
 	lea	rdi, [msg]			; Load msg address in rdi (1st function argument)
 	call	printstr		; Show the string
@@ -104,7 +104,7 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 >
 > **Arguments:** 
 >
-> - Full access 
+> - None
 >
 > **Returns:**
 >  

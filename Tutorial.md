@@ -102,15 +102,15 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 ### Library functions
 
 ### exit
->  Quit program
->
-> **Arguments:** 
->
-> - None
->
-> **Returns:**
->  
-> -  This function does not return
+Quit program
+
+**Arguments:** 
+
+- None
+
+**Returns:**
+  
+-  This function does not return
 
 - - -
 

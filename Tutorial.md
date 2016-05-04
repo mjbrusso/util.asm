@@ -32,14 +32,16 @@ b2: db	10, 20       ; two sequential bytes
 b3: db	0 times 10   ; 10 bytes, value=0
 c1: db	'a','b'      ; two chars
 c2: db	'hello',0    ; zero terminated string 
-i:  dw	0x1234       ; word (32 bits)
+i:  dw	1234         ; 16 bits integer
+j:  dd	0x1234       ; 32 bits integer
+k:  dq	50000000000  ; 64 bits integer
 n:  equ	12           ; constant 
 ```
 ###Uninitialized data examples 
 ```nasm
      session .bss
 str: resb 100      ; reserve 100 uninitialized bytes 
-vet: resw 10       ; reserve 10 uninitialized words (10*32 bits)
+vet: resd 10       ; reserve 10 uninitialized words (10*32 bits)
 ```
 ###Literals
 ```nasm

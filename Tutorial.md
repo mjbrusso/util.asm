@@ -149,7 +149,7 @@ Print a string
 ###`printint`
 
 **Description:** 
-Print a integer number (decimal)
+Print integer number (decimal)
 
 **Arguments:** 
 
@@ -178,7 +178,7 @@ Print a integer number (decimal)
 
 ### `readint`
 **Description:** 
-Read a int64 from standard input
+Read int64 from standard input
 
 **Arguments:** 
 

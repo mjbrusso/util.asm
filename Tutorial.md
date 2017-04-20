@@ -5,26 +5,26 @@ NASM + util.asm Tutorial
 Part I - NASM
 ---
 
-###Installing NASM on Ubuntu/Debian Linux
+### Installing NASM on Ubuntu/Debian Linux
 
 `sudo apt-get install nasm `
 
-###Assembling, linking  and running a program
+### Assembling, linking  and running a program
 ```
 nasm -felf64 hello.asm
 ld hello.o -o hello 
 ./hello
 ```
 
-###Comments
+### Comments
 `; Line comment`
 
-###Program sections 
+### Program sections 
 - `.text` :  Program code (instructions)
 - `.data` :  Initialized data
 - `.bss` 	:   Uninitialized data
 
-###Initialized data examples
+### Initialized data examples
 ```nasm
     session .data
 b1: db	100          ; 1 byte, value=100
@@ -37,13 +37,13 @@ j:  dd	0x1234       ; 32 bits integer
 k:  dq	50000000000  ; 64 bits integer
 n:  equ	12           ; constant 
 ```
-###Uninitialized data examples 
+### Uninitialized data examples 
 ```nasm
      session .bss
 str: resb 100      ; reserve 100 uninitialized bytes 
 vet: resd 10       ; reserve 10 uninitialized words (10*32 bits)
 ```
-###Literals
+### Literals
 ```nasm
 mov     ax,200          ; decimal 
 mov     ax,0200d        ; decimal 
@@ -57,7 +57,7 @@ mov     ax,11001000b    ; binary
 mov     ax,0b11001000   ; binary
 ```
 
-###Hello World 
+### Hello World 
 ```nasm
 %include '../util.asm'		; Includes the library
 

@@ -117,7 +117,6 @@ Quit program
 - - -
 
 ###`endl`
-
 **Description:** 
 Prints a newline (line break)
 
@@ -132,7 +131,6 @@ Prints a newline (line break)
 ---
 
 ###`printstr`
-
 **Description:** 
 Print a string
 
@@ -147,7 +145,6 @@ Print a string
 - - -
 
 ###`printint`
-
 **Description:** 
 Print integer number (decimal)
 
@@ -162,7 +159,6 @@ Print integer number (decimal)
 - - -
 
 ###`readstr`
-
 **Description:** Read up to _max_size_ chars from standard input into a string.
 
 **Arguments:** 

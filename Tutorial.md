@@ -103,7 +103,8 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 
 ### Library functions
 
-###`exit`
+### `exit`
+
 Quit program
 
 **Arguments:** 
@@ -116,7 +117,8 @@ Quit program
 
 - - -
 
-###`endl`
+### `endl`
+
 **Description:** 
 Prints a newline (line break)
 
@@ -130,7 +132,8 @@ Prints a newline (line break)
 
 ---
 
-###`printstr`
+### `printstr`
+
 **Description:** 
 Print a string
 
@@ -144,7 +147,8 @@ Print a string
 
 - - -
 
-###`printint`
+### `printint`
+
 **Description:** 
 Print integer number (decimal)
 
@@ -158,7 +162,8 @@ Print integer number (decimal)
 
 - - -
 
-###`readstr`
+### `readstr`
+
 **Description:** Read up to _max_size_ chars from standard input into a string.
 
 **Arguments:** 
@@ -173,6 +178,7 @@ Print integer number (decimal)
 - - -
 
 ### `readint`
+
 **Description:** 
 Read int64 from standard input
 
@@ -186,7 +192,7 @@ Read int64 from standard input
 
 - - -
 
-###`strlen`
+### `strlen`
 
 **Description:** 
 Calculates the length of string ( excluding the terminating null)

@@ -93,7 +93,7 @@ r9 | 6th argument | No
 r10-11 | Free | No
 r12-r15 | Free |  Yes
 
-For more information see [System V Application Binary Interface](https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf).
+For more information, see [System V Application Binary Interface](https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf).
 
 Arguments are passed left to right:  
 

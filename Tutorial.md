@@ -26,7 +26,7 @@ ld hello.o -o hello
 
 ### Initialized data examples
 ```nasm
-    session .data
+    section .data
 b1: db	100          ; 1 byte, value=100
 b2: db	10, 20       ; two sequential bytes
 b3: db	0 times 10   ; 10 bytes, value=0
@@ -39,7 +39,7 @@ n:  equ	12           ; constant
 ```
 ### Uninitialized data examples 
 ```nasm
-     session .bss
+     section .bss
 str: resb 100      ; reserve 100 uninitialized bytes 
 vet: resd 10       ; reserve 10 uninitialized words (10*32 bits)
 ```

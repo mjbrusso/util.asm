@@ -15,10 +15,6 @@ In the current version the following functions are available:
  - printint
  - readint
 
-For full documentation, see the project's [Tutorial](https://github.com/mjbrusso/util.asm/blob/master/Tutorial.md).
-
-
-
 
 Part I - NASM
 ---

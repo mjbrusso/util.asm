@@ -84,7 +84,7 @@ _start:
 	call	exit			; Quit program   
 
 section .data				; Program initialized data
-msg	db	'Hello, World!', 0	; String terminated by zero	
+msg:	db	'Hello, World!', 0	; String terminated by zero	
 ```
 ----------
 Part II - The Library

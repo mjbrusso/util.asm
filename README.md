@@ -73,12 +73,12 @@ mov     ax,0b11001000   ; binary
 
 ### Hello World 
 ```nasm
-%include '../util.asm'		; Includes the library
+%include '../util.asm'			; Includes the library
 
 section .text				; Program code
-global  _start          	; Entry point
+global  _start          		; Entry point
 _start:
-	lea	rdi, [msg]			; Load msg address in rdi (1st function argument)
+	lea	rdi, [msg]		; Load msg address in rdi (1st function argument)
 	call	printstr		; Show the string
 	call	endl			; Line break
 	call	exit			; Quit program   

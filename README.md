@@ -1,23 +1,22 @@
 util.asm NASM Library
 ------
 
-**util.asm** is a small set of x64 assembly routines for The Netwide Assembler (NASM). It's under development and aims to be used as a tool to learn Assembly Programming. 
-
-## Functions
+**util.asm** is a small set of x64 assembly routines for The Netwide Assembler ([NASM](https://www.nasm.us/)). It is under development and aims to be used as a tool to learn Assembly Programming, without need to link the *libc*. 
 
 In the current version the following functions are available:
 
- - exit
- - endl
- - strlen
- - printstr
- - readstr
- - printint
- - readint
+ - [exit](#exit)
+ - [endl](#endl)
+ - [strlen](#strlen)
+ - [printstr](#printstr)
+ - [readstr](#readstr)
+ - [printint](#printint)
+ - [readint](#readint)
 
 
-Part I - NASM
----
+# Part I - NASM
+
+## Using NASM
 
 ### Installing NASM on Ubuntu/Debian Linux
 
@@ -29,6 +28,8 @@ nasm -felf64 hello.asm
 ld hello.o -o hello 
 ./hello
 ```
+
+## Assembly (Intel syntax)
 
 ### Comments
 `; Line comment`
@@ -51,12 +52,14 @@ j:  dd	0x1234       ; 32 bits integer
 k:  dq	50000000000  ; 64 bits integer
 n:  equ	12           ; constant 
 ```
+
 ### Uninitialized data examples 
 ```nasm
      section .bss
 str: resb 100      ; reserve 100 uninitialized bytes 
 vet: resd 10       ; reserve 10 uninitialized words (10*32 bits)
 ```
+
 ### Literals
 ```nasm
 mov     ax,200          ; decimal 
@@ -71,24 +74,41 @@ mov     ax,11001000b    ; binary
 mov     ax,0b11001000   ; binary
 ```
 
+# Part II - The Library
+
+## Installing
+
+Just clone this repository to use `util.asm`:
+
+```bash
+git clone https://github.com/mjbrusso/util.asm.git
+cd util.asm
+```
+
 ### Hello World 
 ```nasm
-%include '../util.asm'			; Includes the library
+%include '../util.asm'      ; Includes the library
 
 section .text				; Program code
-global  _start          		; Entry point
+global  _start          	; Entry point
 _start:
-	lea	rdi, [msg]		; Load msg address in rdi (1st function argument)
+	lea	    rdi, [msg]		; Load msg address in rdi (1st function argument)
 	call	printstr		; Show the string
 	call	endl			; Line break
 	call	exit			; Quit program   
 
-section .data				; Program initialized data
-msg:	db	'Hello, World!', 0	; String terminated by zero	
+section .data				    ; Program initialized data
+msg: db	'Hello, World!', 0	; String terminated by zero	
 ```
-----------
-Part II - The Library
----
+
+### Examples
+
+We provide a few examples.
+
+```bash
+cd examples
+make all
+```
 
 ### Calling Convention
 
@@ -115,7 +135,7 @@ Arguments are passed left to right:
 fn(rdi, rsi, rdx, rcx, r8, r9)
 ```
 
-### Library functions
+## Library functions
 
 ### `exit`
 

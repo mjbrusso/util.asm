@@ -49,15 +49,15 @@ endl:
 ;		rax: string size
 ;*********************************************************************
 strlen:				
-		xor		rax, rax			; rax=0			// reset count
+		xor		rax, rax			; rax=0;		 // reset counter
 .loop:								; do{
-		cmp		byte [rdi], 0		;   if (*s==0)	// If zero, skip loop
-		je		strlen.end			;     break
-		inc		rax					;   rax++ 		// increment count
-		inc		rdi					; 	s++ 		// advance to the next char
-		jmp		strlen.loop			; }while(true)
+		cmp		byte [rdi], 0		;   if (*s==0);	 // If zero, skip loop
+		je		strlen.end			;     break;
+		inc		rax					;   rax++; 		 // increment counter
+		inc		rdi					; 	s++; 		 // advance to the next char
+		jmp		strlen.loop			; }while(true);
 .end:
-		ret							; return rax
+		ret							; return rax;
 ;*********************************************************************
 
 

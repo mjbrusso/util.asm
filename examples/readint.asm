@@ -5,19 +5,15 @@ global		_start
 
 _start:
 	mov		rdi, prompt
-	call	printstr
-	
+	call	printstr	
 	call	readint
-	
-	imul 	r14, rax, 2
-	
+	mov     r14, rax
+    shl     r14, 1      ;  r14 *= 2     
 	mov		rdi, msg2
-	call	printstr
-	
+	call	printstr	
 	mov		rdi, r14
 	call 	printint
-	call 	endl
-	
+	call 	endl	
 	call 	exit   
 	
             

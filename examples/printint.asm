@@ -43,14 +43,6 @@ _start:
 	mov 	rdi, -9988776655
 	call	printint
 	call 	endl
-
-	mov 	rdi, -443322
-	call	printint
-	call 	endl
-
-	mov 	rdi, -9
-	call	printint
-	call 	endl
 	
 	mov 	rdi, -9223372036854775808 ;; _I64_MIN
 	call	printint
@@ -64,7 +56,7 @@ _start:
 ini: 
 	mov 	rdi, rbx
 	call	printint
-	mov 	rdi, tab	
+	mov 	rdi, sep	
 	call	printstr
 	dec		rbx
 	cmp		rbx, -100
@@ -74,5 +66,5 @@ ini:
 	call	exit   
 
 section		.data
-tab:		db	',', 0	
+sep:		db	', ', 0	
             

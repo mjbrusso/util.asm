@@ -5,13 +5,16 @@ util.asm NASM Library
 
 In the current version the following functions are available:
 
- - [exit](#exit)
- - [endl](#endl)
- - [strlen](#strlen)
- - [printstr](#printstr)
- - [readstr](#readstr)
- - [printint](#printint)
- - [readint](#readint)
+ - [exit](#void-exitint64-code)
+ - [exit0](#void-exit0)
+ - [strlen](#int64-strlenchar-s)
+ - [itoa](#void-itoaint64-value-char-s)
+ - [atoi](#int64-atoichar-s)
+ - [endl](#void-endl)
+ - [printstr](#void-printstrchar-s)
+ - [printint](#void-printintint64-n)
+ - [readstr](#int64-readstrchar-s-int64-maxsize)
+ - [readint](#int64-readint)
 
 
 # Part I - NASM
@@ -87,18 +90,20 @@ cd util.asm
 
 ### Hello World 
 ```nasm
-%include '../util.asm'      ; Includes the library
+%include	'../util.asm'
 
-section .text				; Program code
-global  _start          	; Entry point
+section		.text
+global		_start
+
 _start:
-	lea	    rdi, [msg]		; Load msg address in rdi (1st function argument)
-	call	printstr		; Show the string
-	call	endl			; Line break
-	call	exit			; Quit program   
+	lea		rdi, [msg]      ; rdi = &msg[0]
+	call	printstr        ; printstr(msg)
+	call	endl            ; endl()
+    xor     rdi, rdi        ; rdi = 0
+	call	exit            ; exit(0)
 
-section .data				    ; Program initialized data
-msg: db	'Hello, World!', 0	; String terminated by zero	
+section		.data
+msg:		db	'Hello, World!', 0	
 ```
 
 ### Examples
@@ -137,9 +142,25 @@ fn(rdi, rsi, rdx, rcx, r8, r9)
 
 ## Library functions
 
-### `exit`
+### `void exit(int64 code)`
 
+**Description:** 
 Quit program
+
+**Arguments:** 
+
+- `rdi: int64 code`: Exit code (0=Success, >0=Error) 
+
+**Returns:**
+  
+- This function does not return
+
+- - -
+  
+### `void exit0()`
+
+**Description:** 
+Quit program with status code = 0
 
 **Arguments:** 
 
@@ -151,7 +172,51 @@ Quit program
 
 - - -
 
-### `endl`
+### `int64 strlen(char *s)`
+
+**Description:** 
+Calculates the length of string ( excluding the terminating null)
+
+**Arguments:** 
+
+- `rdi: char *s`: address of a null-terminated string (array of chars terminated by 0)
+
+**Returns:**
+ 
+- `rax: int64`: string size
+		
+- - -
+
+### `void itoa(int64 value, char *s)`
+
+**Description:** 
+Converts an integer to a null-terminated string.
+
+**Arguments:** 
+- `rdi: int64 value`: Integer value to convert.
+- `rsi: char *s`: Memory address where to store the resulting string.
+
+**Returns:**
+
+- `rax: int64`: string size
+
+- - - 
+
+### `int64 atoi(char *s)`
+
+**Description:** 
+Convert string to integer.
+
+**Arguments:** 
+- `rdi: char *s`: Address of a null-terminated string (array of chars terminated by 0)
+
+**Returns:**
+- `rax: int64`: integer value
+
+- - - 
+
+  
+### `void endl()`
 
 **Description:** 
 Prints a newline (line break)
@@ -166,14 +231,14 @@ Prints a newline (line break)
 
 ---
 
-### `printstr`
+### `void printstr(char *s)`
 
 **Description:** 
 Print a string
 
 **Arguments:** 
 
-- `rdi`: address of a null-terminated string (array of chars terminated by 0)
+- `rdi: char *s`: address of a null-terminated string (array of chars terminated by 0)
 
 **Returns:**
  
@@ -181,14 +246,14 @@ Print a string
 
 - - -
 
-### `printint`
+### `void printint(int64 n)`
 
 **Description:** 
 Print integer number (decimal)
 
 **Arguments:** 
 
-- `rdi`: number
+- `rdi: int64 n`: Value to print
 
 **Returns:**
  
@@ -196,22 +261,22 @@ Print integer number (decimal)
 
 - - -
 
-### `readstr`
+### `int64 readstr(char *s, int64 maxsize)`
 
-**Description:** Read up to _max_size_ chars from standard input into a string.
+**Description:** Read up to *maxsize* chars from standard input into a string.
 
 **Arguments:** 
 
-- `rdi`: address of a string (array of chars)
-- `rsi`: input size limit (_max_size_)
+- `rdi: char *s`: address of a string (array of chars)
+- `rsi: int64 maxsize`: input size limit
 
 **Returns:**
  
-- `rax`: Number of characters read
+- `rax: int64`: Number of characters read
 
 - - -
 
-### `readint`
+### `int64 readint()`
 
 **Description:** 
 Read int64 from standard input
@@ -222,24 +287,10 @@ Read int64 from standard input
 
 **Returns:**
  
-- `rax`: The value entered
+- `rax: int64`: The value entered
 
 - - -
 
-### `strlen`
-
-**Description:** 
-Calculates the length of string ( excluding the terminating null)
-
-**Arguments:** 
-
-- `rdi`: address of a null-terminated string (array of chars terminated by 0)
-
-**Returns:**
- 
-- `rax`: string size
-		
-- - -
 
 
 

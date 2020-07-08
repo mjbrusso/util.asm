@@ -24,19 +24,23 @@ _start:
 	call	printint
 	call	endl
 	
-	mov		rdi, 23456
+	mov		rdi, 12345
 	call	printint
 	call	endl
 	
-	mov  	rdi, 3456
+	mov  	rdi, 1234
 	call  	printint
 	call 	endl
 	
-	mov 	rdi, 99
+	mov 	rdi, 123
 	call  	printint
 	call 	endl
 	
-	mov 	rdi, 0
+	mov 	rdi, 12
+	call	printint
+	call 	endl
+
+	mov 	rdi, 1
 	call	printint
 	call 	endl
 
@@ -63,8 +67,8 @@ ini:
 	jge		ini
 	
 	call 	endl
-	call	exit   
+	call	exit0   
 
 section		.data
-sep:		db	', ', 0	
+sep:		db	9, 0	;  \t\0
             

@@ -3,7 +3,7 @@ util.asm NASM Library
 
 **util.asm** is a small set of x64 assembly routines for The Netwide Assembler ([NASM](https://www.nasm.us/)). It is under development and aims to be used as a tool to learn Assembly Programming, without need to link the *libc*. 
 
-In the current version (1.1) the following functions are available:
+In the current version (1.2) the following functions are available:
 
  - [exit](#void-exitint64-code)
  - [exit0](#void-exit0)

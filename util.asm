@@ -1,8 +1,8 @@
 ;*********************************************************************
 ; util.asm 
+; Version: 1.2
 ; Author: mjbrusso
 ; Contributors: AlessandroFonseca
-; Version: 1.1
 ; Licensed under the MIT license (see "license.txt"). 
 ;*********************************************************************
 

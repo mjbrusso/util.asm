@@ -4,14 +4,14 @@ section		.text
 global		_start
 
 _start:
-	mov		rdi, prompt
+	lea		rdi, [prompt]
 	call	printstr	
 	call	readint
     mov     r14, rax
   	mov		rdi, rax
 	call 	printint
     shl     r14, 1      ;  r14 *= 2     
-	mov		rdi, str2
+	lea		rdi, [str2]
 	call	printstr	
 	mov		rdi, r14
 	call 	printint

@@ -21,60 +21,76 @@ In the current version (1.1) the following functions are available:
 
 ## Using NASM
 
-### Installing NASM on Ubuntu/Debian Linux
+### Installing
 
-`sudo apt-get install nasm `
+- GNU/Linux Ubuntu, Debian, Mint:  `sudo apt install nasm`
+- GNU/Linux Fedora, Red Hat, SUSE: `sudo dfn install nasm` or `sudo yum install nasm`
+- Others (macOS, ...): Download and unzip the latest stable version fromth [NASM web site](https://www.nasm.us/)
 
 ### Assembling, linking  and running a program
+
+#### GNU/Linux
 ```
 nasm -felf64 hello.asm
 ld hello.o -o hello 
 ./hello
 ```
 
-## Assembly (Intel syntax)
+### macOS
+
+```
+nasm -fmacho64 hello.asm
+gcc hello.o -o hello 
+./hello
+```
+
+## x64 Assembly (Intel syntax)
 
 ### Comments
 `; Line comment`
+
+
+### Literals
+```nasm
+mov     rax, 200          ; decimal 
+mov     rax, 0200d        ; decimal 
+mov     rax, 0d200        ; decimal 
+mov     rax, ffh          ; hex 
+mov     rax, 0xc8         ; hex 
+mov     rax, 0hc8         ; hex 
+mov     rax, 310o         ; octal
+mov     rax, 0o310        ; octal
+mov     rax, 11001000b    ; binary 
+mov     rax, 0b11001000   ; binary
+```
 
 ### Program sections 
 - `.text` :  Program code (instructions)
 - `.data` :  Initialized data
 - `.bss` 	:   Uninitialized data
 
+
 ### Initialized data examples
 ```nasm
-    section .data
-b1: db	100          ; 1 byte, value=100
-b2: db	10, 20       ; two sequential bytes
-b3: db	0 times 10   ; 10 bytes, value=0
-c1: db	'a','b'      ; two chars
-c2: db	'hello',0    ; zero terminated string 
-i:  dw	1234         ; 16 bits integer
-j:  dd	0x1234       ; 32 bits integer
-k:  dq	50000000000  ; 64 bits integer
-n:  equ	12           ; constant 
+section .data
+
+b1:     db	100          ; 1 byte, value=100
+b2:     db	10, 20       ; two sequential bytes
+b3:     db	0 times 10   ; 10 bytes, value=0
+c1:     db	'a','b'      ; two chars
+c2:     db	'hello',0    ; zero terminated string 
+i:      dw	1234         ; 16 bits integer
+j:      dd	0x1234       ; 32 bits integer
+k:      dq	50000000000  ; 64 bits integer
+n:      equ	0xF0         ; constant 
 ```
 
 ### Uninitialized data examples 
 ```nasm
-     section .bss
-str: resb 100      ; reserve 100 uninitialized bytes 
-vet: resd 10       ; reserve 10 uninitialized words (10*32 bits)
-```
+section .bss
 
-### Literals
-```nasm
-mov     ax,200          ; decimal 
-mov     ax,0200d        ; decimal 
-mov     ax,0d200        ; decimal 
-mov     ax,ffh          ; hex 
-mov     ax,0xc8         ; hex 
-mov     ax,0hc8         ; hex 
-mov     ax,310o         ; octal
-mov     ax,0o310        ; octal
-mov     ax,11001000b    ; binary 
-mov     ax,0b11001000   ; binary
+str:    resb 100      ; reserve 100 uninitialized bytes 
+vet:    resd 10       ; reserve 10 uninitialized words (10*32 bits)
 ```
 
 # Part II - The Library
@@ -290,8 +306,6 @@ Read int64 from standard input
 - `rax: int64`: The value entered
 
 - - -
-
-
 
 
 ## License

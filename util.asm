@@ -6,11 +6,8 @@
 ; Licensed under the MIT license (see "license.txt"). 
 ;*********************************************************************
 
-section .text
-global	exit, exit0, strlen, itoa, atoi, endl, printstr, printint, readstr, readint	; public symbols
-
 %ifidn __OUTPUT_FORMAT__, macho64
-    default rel         ; This sets registerless instructions in 64-bit mode to be RIP–relative
+    default rel 
     SYS_READ:   equ     0x2000003
     SYS_WRITE:  equ     0x2000004
     SYS_EXIT:   equ     0x2000001
@@ -18,7 +15,8 @@ global	exit, exit0, strlen, itoa, atoi, endl, printstr, printint, readstr, readi
     STDIN:      equ     0
     STDOUT:     equ     1
 
-    LFNULL:     equ     0x000A    
+    LINEFEED:   equ     0x0A
+    %define     _start _main
 %elifidn __OUTPUT_FORMAT__, elf64
     SYS_READ:   equ     0
     SYS_WRITE:  equ     1
@@ -27,10 +25,12 @@ global	exit, exit0, strlen, itoa, atoi, endl, printstr, printint, readstr, readi
     STDIN:      equ     0
     STDOUT:     equ     1
 
-    LFNULL:     equ     0x000A
+    LINEFEED:   equ     0x0A
 %else
     %error Invalid Output format __OUTPUT_FORMAT__. Check "-f" flag
 %endif
+
+section .text
 
 ;*********************************************************************
 ; void exit(int64 code)
@@ -210,10 +210,8 @@ atoi:
 ; 
 ;*********************************************************************
 endl:
-    push    word LFNULL     ; push {'\n', '\0'} on stack (x86 is little endian)
-	mov		rdi, rsp        ; print the string
+	mov		rdi, endl.str        ; print the string
 	call	printstr
-    add     rsp, 2          ; deallocate the string
 	ret
    
 ;*********************************************************************
@@ -319,3 +317,5 @@ readint:
     ret
 ;*********************************************************************	
 
+section .data 
+endl.str: db LINEFEED, 0

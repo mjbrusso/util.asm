@@ -3,11 +3,11 @@
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	FORMAT = elf64
-    LINKER = ld
+	LINKER = ld
 endif
 ifeq ($(UNAME_S),Darwin)
 	FORMAT = macho64
-    LINKER = gcc
+	LINKER = gcc
 endif
 
 

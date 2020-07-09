@@ -25,7 +25,7 @@ In the current version (1.1) the following functions are available:
 
 - GNU/Linux Ubuntu, Debian, Mint:  `sudo apt install nasm`
 - GNU/Linux Fedora, Red Hat, SUSE: `sudo dfn install nasm` or `sudo yum install nasm`
-- Others (macOS, ...): Download and unzip the latest stable version fromth [NASM web site](https://www.nasm.us/)
+- Others (macOS, ...): Download and unzip the latest stable version from the [NASM web site](https://www.nasm.us/)
 
 ### Assembling, linking  and running a program
 

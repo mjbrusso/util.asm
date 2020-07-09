@@ -1,12 +1,36 @@
 ;*********************************************************************
 ; util.asm 
-; Author: Marcos José Brusso
+; Author: mjbrusso
+; Contributors: AlessandroFonseca
 ; Version: 1.1
 ; Licensed under the MIT license (see "license.txt"). 
 ;*********************************************************************
 
 section .text
 global	exit, exit0, strlen, itoa, atoi, endl, printstr, printint, readstr, readint	; public symbols
+
+%ifidn __OUTPUT_FORMAT__, macho64
+    default rel         ; This sets registerless instructions in 64-bit mode to be RIP–relative
+    SYS_READ:   equ     0x2000003
+    SYS_WRITE:  equ     0x2000004
+    SYS_EXIT:   equ     0x2000001
+
+    STDIN:      equ     0
+    STDOUT:     equ     1
+
+    LFNULL:     equ     0x000A    
+%elifidn __OUTPUT_FORMAT__, elf64
+    SYS_READ:   equ     0
+    SYS_WRITE:  equ     1
+    SYS_EXIT:   equ     60
+
+    STDIN:      equ     0
+    STDOUT:     equ     1
+
+    LFNULL:     equ     0x000A
+%else
+    %error Invalid Output format __OUTPUT_FORMAT__. Check "-f" flag
+%endif
 
 ;*********************************************************************
 ; void exit(int64 code)
@@ -22,7 +46,7 @@ global	exit, exit0, strlen, itoa, atoi, endl, printstr, printint, readstr, readi
 ;
 ;*********************************************************************
 exit:
-    mov		rax, 60                 ; rax: system call number (60=exit)
+    mov		rax, SYS_EXIT                 ; rax: system call number
     syscall    
 ;*********************************************************************
 
@@ -186,7 +210,7 @@ atoi:
 ; 
 ;*********************************************************************
 endl:
-    push    word 0x000A     ; push {'\n', '\0'} on stack (x86 is little endian)
+    push    word LFNULL     ; push {'\n', '\0'} on stack (x86 is little endian)
 	mov		rdi, rsp        ; print the string
 	call	printstr
     add     rsp, 2          ; deallocate the string
@@ -209,13 +233,13 @@ endl:
 ; 
 ;*********************************************************************
 printstr:
-    push 	rdi			; save copy (rdi should be caller saved)
+    mov 	r15, rdi        ; save copy (rdi should be caller saved)
     call 	strlen
-    mov     rdx, rax	; string size
-    pop     rsi		    ; string
-    mov		rax, 1		; system call number (1=sys_write)
-    mov     rdi, 1      ; file descriptor (1=stdout)       
-    syscall				; system call            
+    mov     rdx, rax	    ; string size
+    mov     rsi, r15        ; string
+    mov		rax, SYS_WRITE	; system call number
+    mov     rdi, STDOUT     ; file descriptor
+    syscall				    ; system call            
     ret
 ;*********************************************************************
 
@@ -260,10 +284,10 @@ printint:
 ;*********************************************************************
 readstr:
     mov		r8, rdi				; copy of buffer address
-    mov		rax, 0				; system call number (0=sys_read)
+    mov		rax, SYS_READ       ; system call number
     mov 	rdx, rsi			; pointer to buffer
     mov 	rsi, rdi			; max size
-    mov 	rdi, 0				; file descriptor (0=stdin)		
+    mov 	rdi, STDIN			; file descriptor
     syscall						; system call 
     dec 	rax					; removing trailing newline char
     mov		byte [r8+rax], 0	; replace with '\0'

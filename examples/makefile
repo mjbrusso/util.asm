@@ -3,9 +3,11 @@
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	FORMAT = elf64
+    LINKER = ld
 endif
 ifeq ($(UNAME_S),Darwin)
 	FORMAT = macho64
+    LINKER = gcc
 endif
 
 
@@ -13,19 +15,19 @@ all:	hello printint readstr readint
 
 hello:	hello.asm ../util.asm
 	nasm -f $(FORMAT) hello.asm
-	ld -o hello hello.o
+	$(LINKER) -o hello hello.o
 
 readstr:	readstr.asm ../util.asm
 	nasm -f $(FORMAT) readstr.asm
-	ld -o readstr readstr.o
+	$(LINKER) -o readstr readstr.o
 		
 printint:	printint.asm ../util.asm
 	nasm -f $(FORMAT) printint.asm
-	ld -o printint printint.o
+	$(LINKER) -o printint printint.o
 
 readint:	readint.asm ../util.asm
 	nasm -f $(FORMAT) readint.asm
-	ld -o readint readint.o
+	$(LINKER) -o readint readint.o
 	
 rebuild:
 	make clean

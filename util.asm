@@ -1,7 +1,7 @@
 ;*********************************************************************
 ; util.asm 
 ; Author: Marcos José Brusso
-; Version: 1.0.0
+; Version: 1.1
 ; Licensed under the MIT license (see "license.txt"). 
 ;*********************************************************************
 
@@ -86,31 +86,46 @@ strlen:
 ; 
 ;*********************************************************************
 itoa:		
-    mov		rax, rdi			; rax = n	
-    xor 	rcx, rcx			; is_neg = false
-    cmp 	rax, 0				;
-    jge		itoa.nn  		    ; if(n<0)	  
-    not 	rcx					; 		is_neg = true
-    neg 	rax					;     	n = -n
-.nn:	
-    mov 	r10, 10				; r10 = 10
-    lea 	rdi, [rsi+29]       ; char *p = &s[29]
-.loop:							; do{
-    xor 	rdx, rdx			;		rdx=0 
-    div 	r10					; 		rdx=rdx:rax%10; rax=rdx:rax/10
-    add 	dl, '0'				;		decimal digit
-    mov 	byte [rsi], dl		;		*p = digit in dl
-    dec 	rdi					; 		p--
-    cmp 	rax, 0				; 
-    jg 		itoa.loop		    ; }while (n>0)
-
-    test 	rcx, rcx			; if(is_neg)
-    jz		itoa.notneg	        ;   	// Prepend minus sign	
-    mov 	byte [rsi], '-'		; 		*p = '-'
-    dec 	rdi					;		p--    
-.notneg:		
-    inc 	rdi					; p++
-    ret
+        test    rdi, rdi                        ; value = rdi
+        jz      itoa.iszero                     ; value==0 has a direct solution
+        jns     itoa.notneg                     ; if(value <0 )
+        mov     byte [rsi], '-'                 ;       *s = '-'
+        neg     rdi                             ;       value = -value
+        inc     rsi                             ;       s++
+.notneg:
+        mov     r9b, 1                          ; bool leftzero=true
+        mov     r10, 10                         ; base = 10
+        mov     rcx, 1000000000000000000        ; divisor = 1000000000000000000
+        mov     r8, 19                          ; cont = 19 // Will repeat 19 times
+.loop:                                          ; do{
+        mov     rax, rdi                        ;   dividend[0..31] = value
+        xor 	rdx, rdx                        ;   dividend[32..63] = 0
+        idiv    rcx                             ;   rax=(rdx:rax)/rcx ; rdx=(rdx:rax)%rcx
+        test    al, al                          ;   digit = rax[0..7]
+        jnz     itoa.notdigit0                    ;   if(digit!=0)
+        test    r9b, r9b                        ;        if(leftzero)                       
+        jnz     itoa.nextdigit                   ;            continue
+        jmp     itoa.digit0
+.notdigit0:
+        xor     r9b, r9b                        ;   leftzero = false
+.digit0:        
+        add     eax, 48                         ;   digit = '0' + digit
+        mov     rdi, rdx                        ;   value %= divisor
+        mov     byte [rsi], al                  ;   *p = digit
+        inc     rsi                             ;   p++        
+.nextdigit:
+        mov     rax, rcx                        ;   dividend[0..31] = value
+        xor 	rdx, rdx                        ;   dividend[32..63] = 0
+        idiv    r10                             ;   rax=(rdx:rax)/10 ; rdx=(rdx:rax)%10
+        mov     rcx, rax                        ;   divisor /= 10
+        dec     r8                              ;   cont--
+        jne     itoa.loop                       ; }while(cont!=0)
+.end:             
+        mov     byte [rsi], 0                   ; *p = '\0'
+        ret
+.iszero:
+        mov     word [rsi], 0x0030              ; *p = "0" (x86 is little endian)
+        ret
 ;*********************************************************************
 
 
@@ -142,7 +157,7 @@ atoi:
     neg		rax							;		rax=-rax
     jmp		atoi.end					;
 .notneg:					
-    cmp		cl, '9'						;	 if(!isdigit(cl)) continue
+    cmp		cl, '9'						;	 if(!isdigit(cl)) nextdigit
     jg		atoi.endloop				;
     sub		cl, '0'						;
     jl		atoi.endloop				;
@@ -279,3 +294,4 @@ readint:
     add     rsp, 40                     ; deallocate s from stack
     ret
 ;*********************************************************************	
+

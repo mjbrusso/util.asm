@@ -210,7 +210,7 @@ atoi:
 ; 
 ;*********************************************************************
 endl:
-	mov		rdi, endl.str        ; print the string
+	lea		rdi, [endl.str]        ; print the string
 	call	printstr
 	ret
    

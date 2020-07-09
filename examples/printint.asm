@@ -60,7 +60,7 @@ _start:
 ini: 
 	mov 	rdi, rbx
 	call	printint
-	mov 	rdi, sep	
+	lea 	rdi, [sep]	
 	call	printstr
 	dec		rbx
 	cmp		rbx, -100

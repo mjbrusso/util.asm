@@ -6,7 +6,8 @@
 ; Licensed under the MIT license (see "license.txt"). 
 ;*********************************************************************
 
-%ifidn __OUTPUT_FORMAT__, macho64
+%ifidn __OUTPUT_FORMAT__, macho64       
+; macOS
     default rel 
     SYS_READ:   equ     0x2000003
     SYS_WRITE:  equ     0x2000004
@@ -17,7 +18,8 @@
 
     LINEFEED:   equ     0x0A
     %define     _start _main
-%elifidn __OUTPUT_FORMAT__, elf64
+%elifidn __OUTPUT_FORMAT__, elf64   
+; Linux 64?
     SYS_READ:   equ     0
     SYS_WRITE:  equ     1
     SYS_EXIT:   equ     60

@@ -90,7 +90,7 @@ n:      equ	0xF0         ; constant
 section .bss
 
 str:    resb 100      ; reserve 100 uninitialized bytes 
-vet:    resd 10       ; reserve 10 uninitialized words (10*32 bits)
+vet:    resd 10       ; reserve 10 uninitialized dwords (10*32 bits)
 ```
 
 # Part II - The Library

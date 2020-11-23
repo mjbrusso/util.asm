@@ -167,7 +167,8 @@ itoa:
 ; Returns:
 ;   rax: int64: integer value
 ;*********************************************************************
-atoi:		
+atoi:
+    push    r12                         ; r12 is callee saved
     mov     r12, rdi                    ; rdi is caller saved    
     call    strlen
     lea 	rdi, [r12+rax-1]		    ; char *p = &s[strlen(string)];  //scans string backward
@@ -193,7 +194,8 @@ atoi:
 .endloop:
     dec		rdi							;	 previous char //scans string backward
     jmp		atoi.beginloop			    ; }
-.end:		
+.end:	
+    pop     r12                         ; restore r12
     ret   
 ;*********************************************************************
 
@@ -233,13 +235,15 @@ endl:
 ; 
 ;*********************************************************************
 printstr:
+    push    r15             ; r15 is callee saved
     mov 	r15, rdi        ; save copy (rdi should be caller saved)
     call 	strlen
     mov     rdx, rax	    ; string size
     mov     rsi, r15        ; string
     mov		rax, SYS_WRITE	; system call number
     mov     rdi, STDOUT     ; file descriptor
-    syscall				    ; system call            
+    syscall				    ; system call        
+    pop     r15    
     ret
 ;*********************************************************************
 

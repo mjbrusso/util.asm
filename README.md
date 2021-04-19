@@ -311,3 +311,7 @@ Read int64 from standard input
 ## License
 
 Licensed under the [MIT license](https://github.com/mjbrusso/util.asm/blob/master/license.txt).
+
+## Thanks
+
+[AlessandroFonseca](https://github.com/AlessandroFonseca) : Mac OS port

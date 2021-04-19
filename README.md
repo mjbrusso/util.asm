@@ -314,4 +314,4 @@ Licensed under the [MIT license](https://github.com/mjbrusso/util.asm/blob/maste
 
 ## Thanks
 
-[AlessandroFonseca](https://github.com/AlessandroFonseca) : Mac OS port
+[AlessandroFonseca](https://github.com/AlessandroFonseca) : macOS port

@@ -76,7 +76,7 @@ section .data
 
 b1:     db	100          ; 1 byte, value=100
 b2:     db	10, 20       ; two sequential bytes
-b3:     db	0 times 10   ; 10 bytes, value=0
+b3:     times 10 db 0        ; 10 bytes, value=0
 c1:     db	'a','b'      ; two chars
 c2:     db	'hello',0    ; zero terminated string 
 i:      dw	1234         ; 16 bits integer

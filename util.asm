@@ -175,7 +175,7 @@ atoi:
     xor 	rax, rax					; result value
     mov 	rdx, 1						; multiplier
 .beginloop:		
-    cmp		rdi, rsp				    ; while(p>=s){
+    cmp		rdi, r12				    ; while(p>=s){
     jl		atoi.end					;
     xor		rcx, rcx					;	
     mov 	cl, byte [rdi] 				; 	 cl = current char
